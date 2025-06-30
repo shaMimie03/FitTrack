@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FitTrack - Your Health Companion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Track your fitness journey with FitTrack. Monitor workouts, nutrition, and progress all in one place.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Loading Overlay -->
+<div id="loading-overlay" class="loading-overlay">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toast-container" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100"></div>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg bg-light px-4 py-3 sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold fs-3" href="#">FitTrack</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="#" onclick="showDashboard()">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" onclick="showWorkout()">Workout</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" onclick="showNutrition()">Nutrition</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" onclick="showProgress()">Progress</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" onclick="showCommunity()">Community</a></li>
+
+                <li class="nav-item">
+                    <a class="btn btn-outline-primary ms-3" href="#" onclick="showLogin()">TRY US FREE</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<main class="container-fluid">
+    <!-- Hero Section -->
+    <section id="hero-section" class="hero d-flex align-items-center text-dark px-5 py-4">
+        <div class="row w-100 align-items-center">
+            <div class="col-md-6 text-start">
+                <h1 class="display-5 fw-bold gradient-text">Track the vibes.<br>Own the progress.<br>Be your healthiest flex.</h1>
+                <p class="lead mt-3">FitTrack – Your Health Companion<br>From steps to sleep, moods to meals;<br>Track what matters, stay on your vibe,<br>and level up your wellness game.<br>It's you vs. yesterday, and we're here for the glow-up.</p>
+                <a href="#" class="btn btn-primary mt-3" onclick="showLogin()">TRY US FOR FREE</a>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="img.png" class="img-fluid rounded" alt="Running Woman" width="640" height="427" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard-section" class="dashboard px-5 py-5" style="display: none;">
+        <h2 class="text-center fw-bold mb-5">Dashboard</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-6">
+                <div class="card dashboard-card bg-workout text-white h-100">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <div>
+                            <h3 class="card-title">Workout</h3>
+                            <p class="card-text">Stay active with personalized workout plans, guided routines, and real-time activity tracking to help you build strength and consistency at your own pace.</p>
+                            <button class="btn btn-light mt-2" onclick="showWorkout()">Continue</button>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=640&h=427&q=80" alt="Workout" class="dashboard-image mt-3">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-6">
+                <div class="card dashboard-card bg-nutrition text-white h-100">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <div>
+                            <h3 class="card-title">Nutrition</h3>
+                            <p class="card-text">Log your meals, monitor your daily nutrition goals, and discover balanced eating habits that support your lifestyle and overall wellness.</p>
+                            <button class="btn btn-light mt-2" onclick="showNutrition()">Continue</button>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=640&h=427&q=80" alt="Nutrition" class="dashboard-image mt-3">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-6">
+                <div class="card dashboard-card bg-progress text-white h-100">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <div>
+                            <h3 class="card-title">Progress</h3>
+                            <p class="card-text">Track your health journey with visual insights on workouts, nutrition, mood, and habits; all in one place to keep you motivated and focused.</p>
+                            <button class="btn btn-light mt-2" onclick="showProgress()">Continue</button>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1538805060514-97d9cc17730c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=640&h=427&q=80" alt="Progress" class="dashboard-image mt-3">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-6">
+                <div class="card dashboard-card bg-community text-white h-100">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <div>
+                            <h3 class="card-title">Supportive Community</h3>
+                            <p class="card-text">Connect with like-minded users, share wins and struggles, and get encouragement from a positive space designed to support your wellness goals.</p>
+                            <button class="btn btn-light mt-2" onclick="showCommunity()">Continue</button>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=640&h=427&q=80" alt="Community" class="dashboard-image mt-3">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workout Section -->
+    <section id="workout-section" class="px-5 py-5" style="display: none;">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold">Workout Plans</h2>
+            <button class="btn btn-primary" onclick="showAddWorkoutModal()">+ Add Workout</button>
+        </div>
+
+        <div class="row g-4" id="workout-cards-container">
+            <!-- Workout cards will be dynamically inserted here -->
+        </div>
+
+        <div class="mt-5">
+            <h3 class="fw-bold mb-3">Recent Activity</h3>
+            <div class="table-responsive">
+                <table class="table" id="workout-activity-table">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Workout</th>
+                        <th>Duration</th>
+                        <th>Calories</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nutrition Section -->
+    <section id="nutrition-section" class="px-5 py-5" style="display: none;">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold">Nutrition Tracker</h2>
+            <button class="btn btn-primary" onclick="showAddMealModal()">+ Add Meal</button>
+        </div>
+
+        <div class="row mb-4" id="nutrition-summary">
+            <!-- Nutrition summary cards will be dynamically inserted here -->
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Today's Meals</h5>
+                <div id="today-meals-container">
+                    <!-- Today's meals will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h5 class="fw-bold mb-3">Weekly Nutrition Overview</h5>
+            <div class="chart-container" style="height: 300px;">
+                <canvas id="nutritionChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Section -->
+    <section id="progress-section" class="px-5 py-5" style="display: none;">
+        <h2 class="fw-bold mb-4">Your Progress</h2>
+
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Weight Tracking</h5>
+                        <div class="chart-container" style="height: 250px;">
+                            <canvas id="weightChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Body Measurements</h5>
+                        <div class="table-responsive">
+                            <table class="table" id="measurements-table">
+                                <thead>
+                                <tr>
+                                    <th>Measurement</th>
+                                    <th>Current</th>
+                                    <th>Change</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!-- Measurements will be dynamically inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Workout Stats</h5>
+                        <div class="chart-container" style="height: 250px;">
+                            <canvas id="workoutChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Achievements</h5>
+                        <div class="achievements" id="achievements-container">
+                            <!-- Achievements will be dynamically inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="community-section" class="px-5 py-5" style="display: none;">
+        <h2 class="fw-bold mb-4">Community</h2>
+        <div class="card">
+            <div class="card-body">
+                <p>Welcome to the FitTrack Community! 🚀</p>
+                <p>Share your progress, encourage others, and connect with fellow fitness enthusiasts.</p>
+                <ul>
+                    <li>💬 Motivation from peers</li>
+                    <li>🌟 Celebrate milestones</li>
+                    <li>📢 Get feedback and tips</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Error Section -->
+    <section id="error-section" class="px-5 py-5 text-center" style="display: none;">
+        <div class="alert alert-danger">
+            <h2>Something Went Wrong</h2>
+            <p id="error-message">We encountered an error loading this content.</p>
+            <button class="btn btn-primary" onclick="showDashboard()">Return to Dashboard</button>
+        </div>
+    </section>
+</main>
+
+<!-- Login Modal -->
+<div id="login-screen" class="auth-modal">
+    <div class="auth-container bg-white position-relative">
+        <span class="close-btn" onclick="hideLogin()">&times;</span>
+        <h1 class="text-center mb-2">Welcome to FitTrack</h1>
+        <p class="text-center mb-2">- Your Health Companion -</p>
+        <p class="text-center mb-3">Create your account to unlock your personalized FitTrack dashboard</p>
+        <hr>
+        <h2 class="text-center mb-4">USER LOGIN</h2>
+        <form id="login-form">
+            <div class="mb-3">
+                <input type="email" class="form-control" id="login-email" placeholder="Email" required>
+                <div class="invalid-feedback">Please enter a valid email address</div>
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" id="login-password" placeholder="Password" required minlength="6">
+                <div class="invalid-feedback">Password must be at least 6 characters</div>
+            </div>
+            <div class="mb-3 form-check d-flex justify-content-between">
+                <div>
+                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                    <label class="form-check-label" for="rememberMe">Remember Me</label>
+                </div>
+                <a href="#" class="float-end" onclick="showForgot()">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 py-2 mb-3">LOGIN</button>
+        </form>
+        <div class="divider"><span>or login with</span></div>
+        <button class="btn-social w-100 mb-2">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="20" class="me-2"> Google
+        </button>
+        <button class="btn-social w-100">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Facebook_logo_36x36.svg" width="20" class="me-2"> Facebook
+        </button>
+        <p class="text-center mt-3">New User? <a href="#" onclick="showSignup()">Create new account</a></p>
+    </div>
+</div>
+
+<!-- Forgot Password Modal -->
+<div id="forgot-screen" class="auth-modal">
+    <div class="auth-container bg-white position-relative">
+        <span class="close-btn" onclick="hideForgot()">&times;</span>
+        <h2 class="text-center mb-4">Forgot Password</h2>
+        <p class="text-center mb-3">Enter your email to receive password reset instructions.</p>
+        <form id="forgot-form">
+            <div class="mb-3">
+                <input type="email" id="resetEmail" class="form-control" placeholder="Email" required>
+                <div class="invalid-feedback">Please enter a valid email address</div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 py-2 mb-3">Send Reset Link</button>
+        </form>
+        <p class="text-center">Back to <a href="#" onclick="showLoginFromForgot()">Log In</a></p>
+    </div>
+</div>
+
+<!-- Signup Modal -->
+<div id="signup-screen" class="auth-modal">
+    <div class="auth-container bg-white position-relative">
+        <span class="close-btn" onclick="hideSignup()">&times;</span>
+        <h1 class="text-center mb-4">USER SIGN UP</h1>
+        <form id="signup-form">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <input type="text" class="form-control" id="first-name" placeholder="First name" required>
+                    <div class="invalid-feedback">Please enter your first name</div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <input type="text" class="form-control" id="last-name" placeholder="Last name" required>
+                    <div class="invalid-feedback">Please enter your last name</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <input type="email" class="form-control" id="signup-email" placeholder="Email" required>
+                <div class="invalid-feedback">Please enter a valid email address</div>
+            </div>
+            <div class="mb-3">
+                <input type="tel" class="form-control" id="phone" placeholder="Phone number">
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" id="signup-password" placeholder="Password" required minlength="6">
+                <div class="invalid-feedback">Password must be at least 6 characters</div>
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" id="confirm-password" placeholder="Confirm password" required>
+                <div class="invalid-feedback">Passwords must match</div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 py-2 mb-3">SIGN UP</button>
+        </form>
+        <p class="text-center">Already have an account? <a href="#" onclick="hideSignup(); showLogin();">Log In</a></p>
+
+        <hr>
+        <div class="text-center">
+            <h3>Glad to see you!</h3>
+            <p>Your fitness journey starts now <span style="color: green;">●</span> and we're here every step of the way.</p>
+            <p>This is your time to grow stronger and become the best version of yourself 😊.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Add Workout Modal -->
+<div class="modal fade" id="addWorkoutModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Workout</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="add-workout-form">
+                    <div class="mb-3">
+                        <label class="form-label">Workout Name</label>
+                        <input type="text" class="form-control" id="workout-name" required>
+                        <div class="invalid-feedback">Please enter a workout name</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Type</label>
+                        <select class="form-select" id="workout-type" required>
+                            <option value="">Select type</option>
+                            <option>Strength Training</option>
+                            <option>Cardio</option>
+                            <option>Yoga</option>
+                            <option>HIIT</option>
+                            <option>Pilates</option>
+                        </select>
+                        <div class="invalid-feedback">Please select a workout type</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Duration (minutes)</label>
+                        <input type="number" class="form-control" id="workout-duration" min="1" required>
+                        <div class="invalid-feedback">Please enter a valid duration</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Difficulty</label>
+                        <select class="form-select" id="workout-difficulty" required>
+                            <option value="">Select difficulty</option>
+                            <option>Beginner</option>
+                            <option>Intermediate</option>
+                            <option>Advanced</option>
+                        </select>
+                        <div class="invalid-feedback">Please select a difficulty level</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Notes</label>
+                        <textarea class="form-control" id="workout-notes" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="addWorkout()">Save Workout</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Meal Modal -->
+<div class="modal fade" id="addMealModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Meal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="add-meal-form">
+                    <div class="mb-3">
+                        <label class="form-label">Meal Type</label>
+                        <select class="form-select" id="meal-type" required>
+                            <option value="">Select meal type</option>
+                            <option>Breakfast</option>
+                            <option>Lunch</option>
+                            <option>Dinner</option>
+                            <option>Snack</option>
+                        </select>
+                        <div class="invalid-feedback">Please select a meal type</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Meal Name</label>
+                        <input type="text" class="form-control" id="meal-name" required>
+                        <div class="invalid-feedback">Please enter a meal name</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Calories</label>
+                        <input type="number" class="form-control" id="meal-calories" min="0" required>
+                        <div class="invalid-feedback">Please enter valid calories</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Protein (g)</label>
+                            <input type="number" class="form-control" id="meal-protein" min="0">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Carbs (g)</label>
+                            <input type="number" class="form-control" id="meal-carbs" min="0">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Fats (g)</label>
+                            <input type="number" class="form-control" id="meal-fats" min="0">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Time</label>
+                        <input type="time" class="form-control" id="meal-time" required>
+                        <div class="invalid-feedback">Please select a time</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Notes</label>
+                        <textarea class="form-control" id="meal-notes" rows="2"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="addMeal()">Save Meal</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
